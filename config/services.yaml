@@ -1,0 +1,25 @@
+parameters:
+  admin_prefix: '%env(resolve:ADMIN_PREFIX)%'
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  App\:
+    resource: '../src/*'
+    exclude: '../src/{DependencyInjection,Entity,Infrastructure/Migrations,Tests,Kernel.php}'
+
+  # controllers are imported separately to make sure services can be injected
+  # as action arguments even if you don't extend any base controller class
+  App\Http\Controller\:
+    resource: '../src/Http/Controller/'
+    tags: [ 'controller.service_arguments' ]
+
+  App\Http\Admin\Controller\:
+    resource: '../src/Http/Admin/Controller/'
+    tags: [ 'controller.service_arguments' ]
+
+  # add more service definitions when explicit configuration is needed
+  # please note that last definitions always *replace* previous ones

@@ -1,0 +1,16 @@
+// Variables
+// ===============
+$font: 'Roboto', sans-serif;
+$font-alt: 'Montserrat', sans-serif;
+
+// Font faces
+// ===============
+%section-title {
+  font-size: 52px;
+  font-family: $font-alt;
+  font-weight: 700;
+  line-height: 1.2;
+  @include down(675) {
+    font-size: 45px;
+  }
+}

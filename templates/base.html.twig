@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Welcome!</title>
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:500,700|Roboto:300,400&display=swap" rel="stylesheet">
+  {% block stylesheets %}
+    {{ encore_entry_link_tags('app') }}
+  {% endblock %}
+</head>
+<body>
+  <nav class="header">
+    <ul class="header__nav">
+      <li class="header__home"><a href="#" title="Home">Home</a></li>
+      <li><a href="#">Lobbys</a></li>
+      <li><a href="#">Ladders</a></li>
+      <li><a href="#">eSports</a></li>
+      <li id="switcher">Theme</li>
+    </ul>
+    <ul class="header__side">
+      <li><a href="#">Se connecter</a></li>
+    </ul>
+  </nav>
+  {% block body %}
+  {% endblock %}
+  {% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
+  {% endblock %}
+</body>
+</html>
