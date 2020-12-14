@@ -9,11 +9,13 @@
   --gap: 20px;
 }
 
-.dark-mode {
+.dark {
   --background: #f7fafb;
   --background-light: #fff;
   --color: #121c42;
   --contrast: #4869ee;
+  --space: 8px;
+  --gap: 20px;
 }
 
 // Outils
@@ -37,7 +39,14 @@ body {
 // Modules
 // ===============
 @import "modules/header";
+@import "modules/footer";
+@import "modules/card";
+@import "modules/btn";
+@import "modules/paginate";
+@import "modules/form";
+@import "modules/alert";
+@import "modules/animation";
 
 // Pages
 // ===============
-// @import "pages/single";
+@import "pages/auth";

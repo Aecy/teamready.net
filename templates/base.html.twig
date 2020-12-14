@@ -8,6 +8,9 @@
   {% block stylesheets %}
     {{ encore_entry_link_tags('app') }}
   {% endblock %}
+  {% block javascripts %}
+    {{ encore_entry_script_tags('app') | replace({'<script': '<script defer'}) | raw }}
+  {% endblock %}
 </head>
 <body>
   <nav class="header">
@@ -16,16 +19,17 @@
       <li><a href="#">Lobbys</a></li>
       <li><a href="#">Ladders</a></li>
       <li><a href="#">eSports</a></li>
-      <li id="switcher">Theme</li>
+      <li id="theme"><a href="#">Dark</a></li>
     </ul>
     <ul class="header__side">
-      <li><a href="#">Se connecter</a></li>
+      {% if app.user %}
+        <li><a href="{{ path('auth_login') }}">{{ app.user.username }}</a></li>
+      {% else %}
+        <li><a href="{{ path('auth_login') }}">Login</a></li>
+      {% endif %}
     </ul>
   </nav>
   {% block body %}
-  {% endblock %}
-  {% block javascripts %}
-    {{ encore_entry_script_tags('app') }}
   {% endblock %}
 </body>
 </html>

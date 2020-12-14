@@ -29,13 +29,8 @@
   display: block;
 }
 
-.header__nav li#switcher {
-  cursor: pointer;
-}
-
 .header__nav a:hover,
-.header__side a:hover,
-.header__nav li#switcher:hover {
+.header__side a:hover {
   color: var(--contrast);
 }
 
@@ -55,8 +50,10 @@
   margin-left: 0;
 }
 
-@include down(800) {
-  .header {
+//@TODO: responsive https://github.com/Grafikart/Grafikart.fr/blob/4ffae1842bcbac831252b79d814f01e55ca3f698/assets/css/modules/_header.scss
+
+@include down(700) {
+  .header .header__nav li {
     display: none;
   }
 }
