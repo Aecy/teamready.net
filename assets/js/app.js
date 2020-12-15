@@ -1,8 +1,6 @@
 import '../css/app.scss';
 
-import Alert from './elements/Alert';
-
-customElements.define('alert-message', Alert)
+import './elements/Alert';
 
 document.querySelector('#theme').addEventListener('click', (e) => {
   e.preventDefault()
