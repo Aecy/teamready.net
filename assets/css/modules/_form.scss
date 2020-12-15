@@ -10,6 +10,9 @@
   width: 100%;
   outline: none;
 }
+.form-group input.is-invalid {
+  border: 1px solid #FB4635;
+}
 .form-group label {
   display: block;
   margin-bottom: space(1);
@@ -46,7 +49,7 @@
   transition: transform .2s;
   content:'';
   position: absolute;
-  top: calc(50% - 6px);
+  top: calc(50% - 6.5px);
   left: 4px;
   width: 10px;
   height: 10px;
@@ -57,9 +60,20 @@
   transform: scale(1);
 }
 
+// Validation
+// ==================
+.form-error {
+  color: #FB4635;
+  font-size: .8em;
+  margin-top: .5em;
+  line-height: 1.2;
+  * > * {
+    margin-top: .5em;
+  }
+}
+
 // Accessibilité
 // ==================
-
 .form-group input:focus,
 .form-check input:focus + label::before,
 form button:focus  {

@@ -7,7 +7,6 @@ export default class Alert extends global.HTMLElement {
   constructor() {
     super()
     this.type = this.getAttribute('type')
-    this.duration = this.getAttribute('time') || 5000;
     if (this.type === 'error') {
       this.type = 'danger'
     }
@@ -23,7 +22,7 @@ export default class Alert extends global.HTMLElement {
         </button>
       </div>`
     this.querySelector('.alert-close').addEventListener('click', this.close.bind(this))
-    window.setTimeout(this.close.bind(this), this.duration)
+    window.setTimeout(this.close.bind(this), 5000)
   }
 
   close() {
