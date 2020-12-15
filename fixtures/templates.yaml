@@ -1,0 +1,5 @@
+App\Domain\Auth\User:
+  user (template):
+    username: John<current()>
+    email: john<current()>\@doe.fr
+    password: <password('0000')>

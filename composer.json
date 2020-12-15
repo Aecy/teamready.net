@@ -4,7 +4,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "php": ">=7.2.5",
+        "php": ">=7.4",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "composer/package-versions-deprecated": "1.11.99.1",
@@ -43,14 +43,21 @@
         "twig/twig": "^2.12|^3.0"
     },
     "require-dev": {
-        "symfony/browser-kit": "^5.2",
-        "symfony/css-selector": "^5.2",
+        "doctrine/doctrine-fixtures-bundle": "^3.4",
+        "hautelook/alice-bundle": "^2.7",
+        "liip/test-fixtures-bundle": "^1.0.0",
+        "phpunit/phpunit": "^8.5",
+        "spatie/phpunit-watcher": "^1.22",
+        "symfony/browser-kit": "5.2.*",
+        "symfony/css-selector": "5.2.*",
         "symfony/debug-bundle": "^5.2",
         "symfony/maker-bundle": "^1.0",
         "symfony/phpunit-bridge": "^5.2",
         "symfony/stopwatch": "^5.2",
+        "symfony/test-pack": "*",
         "symfony/var-dumper": "^5.2",
-        "symfony/web-profiler-bundle": "^5.2"
+        "symfony/web-profiler-bundle": "^5.2",
+        "theofidry/alice-data-fixtures": "^1.1"
     },
     "config": {
         "optimize-autoloader": true,

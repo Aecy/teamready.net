@@ -1,5 +1,8 @@
 {
-  "private": true,
+  "name": "aecy",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
   "devDependencies": {
     "@symfony/stimulus-bridge": "^1.1.0",
     "@symfony/webpack-encore": "^0.32.0",
@@ -7,8 +10,7 @@
     "node-sass": "^4.13.1",
     "core-js": "^3.0.0",
     "stimulus": "^2.0.0",
-    "regenerator-runtime": "^0.13.2",
-    "webpack-notifier": "^1.6.0"
+    "regenerator-runtime": "^0.13.2"
   },
   "scripts": {
     "dev-server": "encore dev-server",
@@ -16,5 +18,9 @@
     "watch": "encore dev --watch",
     "build": "encore production --progress"
   },
-  "license": "UNLICENSED"
+  "moduleDirectories": [
+    "node_modules",
+    "bower_components",
+    "assets"
+  ]
 }
