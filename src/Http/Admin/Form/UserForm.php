@@ -3,7 +3,6 @@
 namespace App\Http\Admin\Form;
 
 use App\Http\Admin\Data\UserCrudData;
-use App\Infrastructure\Type\DateTimeType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;

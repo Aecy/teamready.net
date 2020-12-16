@@ -17,7 +17,7 @@ test: vendor/autoload.php ## Execute les tests
 
 .PHONY: dev
 dev: vendor/autoload.php ## Lance le serveur de développement
-	$(php) -S $(server) -t public
+	$(php) -S $(http_server):$(http_port) -t public
 
 .PHONY: serve
 serve: vendor/autoload.php ## Allume un serveur avec le HTTPS
