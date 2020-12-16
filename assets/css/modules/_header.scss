@@ -29,8 +29,9 @@
   display: block;
 }
 
-.header__nav a:hover,
-.header__side a:hover {
+.header a:hover,
+.header button:hover,
+.header a[aria-current] {
   color: var(--contrast);
 }
 
@@ -49,8 +50,6 @@
 .header__home li {
   margin-left: 0;
 }
-
-//@TODO: responsive https://github.com/Grafikart/Grafikart.fr/blob/4ffae1842bcbac831252b79d814f01e55ca3f698/assets/css/modules/_header.scss
 
 @include down(700) {
   .header .header__nav li {

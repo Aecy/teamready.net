@@ -3,3 +3,4 @@ App\Domain\Auth\User:
     username: John<current()>
     email: john<current()>\@doe.fr
     password: <password('0000')>
+    created_at: <dateTime('now')>

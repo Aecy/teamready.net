@@ -4,7 +4,10 @@
   --background: #211f2c;
   --background-light: #282535;
   --color: #fff;
+  --color-transparent: #{rgba(#fff, 0)};
   --contrast: #d31c3e;
+  --border: #211f2d;
+  --shadow: #211f2d;
   --space: 8px;
   --gap: 20px;
 }
@@ -13,7 +16,10 @@
   --background: #f7fafb;
   --background-light: #fff;
   --color: #121c42;
+  --color-transparent: #{rgba(#121c42, 0)};
   --contrast: #4869ee;
+  --border: #d5e3ec;
+  --shadow: #d8e1e8;
   --space: 8px;
   --gap: 20px;
 }
@@ -46,7 +52,9 @@ body {
 @import "modules/form";
 @import "modules/alert";
 @import "modules/animation";
+@import "modules/table";
 
 // Pages
 // ===============
 @import "pages/auth";
+@import "pages/dashboard";

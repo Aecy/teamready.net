@@ -1,0 +1,36 @@
+.dashboard {
+  @extend %container;
+}
+.dashboard__title {
+  font-weight: 600;
+  font-size: 1.5rem;
+  margin-bottom: space(1);
+}
+.dashboard__title svg {
+  height: 20px;
+  width: 20px;
+  color: var(--color);
+}
+.dashboard__card {
+  @extend %card;
+  padding: space(3);
+}
+.dashboard__card > * + * {
+  margin-top: space(4);
+}
+.dashboard__search {
+  display: flex;
+}
+.dashboard__search input {
+  max-width: 300px;
+  background: url(../../images/input-search.svg) right 16px center / 12px 12px no-repeat;
+}
+.dashboard__actions {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+.dashboard__btn {
+  @extend .btn-gradient;
+  font-size: .9em;
+}

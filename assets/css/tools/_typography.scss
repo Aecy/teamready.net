@@ -14,10 +14,18 @@ $font-alt: "Montserrat", "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe 
     font-size: 35px;
   }
 }
-
 %hero-text {
   font-size: 18px;
   @include up(600) {
     font-size: 22px;
   }
+}
+
+// Alignements
+// ==================
+.text-right {
+  text-align: right!important;
+}
+.text-center {
+  text-align: center!important;
 }
