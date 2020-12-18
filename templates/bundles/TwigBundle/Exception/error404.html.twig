@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title '404 Not Found' %}
+
+{% block body %}
+  <header class="page-header container">
+    <div class="errors">
+      <h1 class="h1">{{ status_code }} {{ status_text }}</h1>
+      <div class="errors-background" aria-error="404"></div>
+      <button class="btn-primary" onclick="window.history.back();">Previous page</button>
+    </div>
+  </header>
+{% endblock %}

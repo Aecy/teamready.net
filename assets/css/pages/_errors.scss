@@ -1,0 +1,25 @@
+.errors {
+  position: relative;
+  text-align: center;
+}
+.errors-background {
+  display: block;
+  margin: auto;
+  height: 585px;
+  width: 750px;
+  &[aria-error="404"] {
+    background: url(../../images/errors/404.svg) center center / 100% 100% no-repeat;
+  }
+  &[aria-error="403"] {
+    background: url(../../images/errors/403.svg) center center / 100% 100% no-repeat;
+  }
+  &[aria-error="401"] {
+    background: url(../../images/errors/401.svg) center center / 100% 100% no-repeat;
+  }
+  &[aria-error="500"] {
+    background: url(../../images/errors/500.svg) center center / 100% 100% no-repeat;
+  }
+  &[aria-error="503"] {
+    background: url(../../images/errors/503.svg) center center / 100% 100% no-repeat;
+  }
+}

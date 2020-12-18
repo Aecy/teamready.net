@@ -3,10 +3,9 @@
 namespace App\Http\Admin\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/tr-admin", name="admin")
+ * @method getUser() App\Domain\Auth\User
  */
 abstract class BaseController extends AbstractController
 {

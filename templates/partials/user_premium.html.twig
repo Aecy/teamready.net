@@ -1,0 +1,34 @@
+{# State du status premium #}
+<div>
+  {% if subscription %}
+    <h2 class="h3 mb2">
+      {{ icon('user') }}
+      My subscription
+    </h2>
+    {% if active %}
+      <p class="mb2 formatted">
+        You are currently subscribed, your next sample will be linked on <strong>{{ nextPayment | format_date('short') }}</strong>
+      </p>
+      <form action="" method="post" target="_blank">
+        <button class="btn-primary">{{ icon('pen') }} Edit my subscription</button>
+      </form>
+    {% else %}
+      <p class="mb2 formatted">
+        You have cancelled your subscription, it will be automatically suspended after <strong>{{ nextPayment | format_date('short') }}</strong>
+      </p>
+    {% endif %}
+  {% elseif premium %}
+    <h2 class="h3 mb2">
+      {{ icon('user') }}
+      My subscription
+    </h2>
+    <p class="mb2 formatted">
+      You are currently premium until <strong>{{ premiumEnd | format_date('short') }}</strong>
+    </p>
+  {% else %}
+    <h2 class="h4 mb2">
+      You are not premium
+    </h2>
+    <a href="#" class="btn-primary">{{ icon('user') }} Get premium</a>
+  {% endif %}
+</div>

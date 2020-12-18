@@ -1,0 +1,20 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block body %}
+
+  <div class="stack">
+
+    <div class="flex mb1">
+      <div class="dashboard-title">{% block title '' %}</div>
+      <div class="hstack">{% block actions '' %}</div>
+    </div>
+
+    {% include 'partials/alert.html.twig' %}
+
+    <div class="dashboard-card stack-large">
+      {% block content '' %}
+    </div>
+
+  </div>
+
+{% endblock %}

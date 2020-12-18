@@ -1,0 +1,14 @@
+<div class="tabs-bar container bg-light">
+  <a href="#" {% if active == 'profil' %}aria-selected="true"{% endif %}>
+    {{ icon('lines') }}
+    My profile
+  </a>
+  <a href="#" {% if active == 'edit' %}aria-selected="true"{% endif %}>
+    {{ icon('user') }}
+    Editing
+  </a>
+  <a href="#" {% if active == 'badges' %}aria-selected="true"{% endif %}>
+    {{ icon('badge') }}
+    My badges
+  </a>
+</div>

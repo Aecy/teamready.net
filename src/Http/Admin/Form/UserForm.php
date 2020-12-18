@@ -2,6 +2,7 @@
 
 namespace App\Http\Admin\Form;
 
+use App\Domain\Attachment\Type\AttachmentType;
 use App\Http\Admin\Data\UserCrudData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -16,7 +17,8 @@ class UserForm extends AbstractType
     {
         $builder
             ->add('username', TextType::class)
-            ->add('email', EmailType::class);
+            ->add('email', EmailType::class)
+            ->add('avatar', AttachmentType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)

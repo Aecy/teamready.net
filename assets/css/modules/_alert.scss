@@ -9,6 +9,16 @@
   animation: alertIn .5s both;
   line-height: 1.2;
   border-bottom: 3px solid var(--color);
+  box-shadow: 0 2px 20px var(--shadow);
+  a {
+    text-decoration: underline;
+  }
+  a:hover {
+    text-decoration: none;
+  }
+}
+.alert strong {
+  font-weight: bold;
 }
 .alert.out {
   animation: alertOut .5s both;
@@ -27,9 +37,9 @@
   color: var(--color);
   opacity: .3;
   cursor: pointer;
-  transition: opacity .3s;
+  transition: opacity 0.3s;
   &:hover {
-    opacity: .5;
+    opacity: 0.5;
   }
 }
 .alert-close svg {
@@ -38,26 +48,42 @@
   color: var(--color) !important;
 }
 .alert-danger {
-  border-bottom-color: #FB4635;
+  border-bottom-color: var(--red);
   svg:first-child {
-    color: #FB4635;
+    color: var(--red);
   }
 }
 .alert-success {
-  border-bottom-color: #23db72;
+  border-bottom-color: var(--green);
   svg:first-child {
-    color: #23db72;
+    color: var(--green);
   }
 }
-.dashboard .alert {
-  z-index: 5;
-  border-left: 1px solid var(--border);
-  border-right: 1px solid var(--border);
-  border-top: 1px solid var(--border);
+.alert-warning {
+  border-bottom-color: var(--yellow);
+  svg:first-child {
+    color: var(--yellow);
+  }
+}
+.alert__progress {
+  height: 3px;
+  background: var(--background-light);
+  position: absolute;
+  bottom: -3px;
+  right: 0;
+  width: 100%;
+  z-index: 3;
+  transform-origin: 0 100%;
+  animation: alertDuration 2s linear both;
+}
+.dashboard .alert,
+is-floating .alert {
   box-shadow: 0 2px 20px var(--shadow);
   position: fixed;
-  top: var(--container-padding);
-  right: var(--container-padding);
+  top: 20px;
+  right: 20px;
+  max-width: 400px;
+  z-index: 3000;
 }
 
 @keyframes alertIn {
@@ -78,5 +104,13 @@
   to {
     opacity: 0;
     transform: translateY(-10px);
+  }
+}
+@keyframes alertDuration {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
   }
 }

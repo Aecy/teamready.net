@@ -3,12 +3,20 @@
  */
 import {slideUp} from '../modules/animation'
 
-export default class Alert extends global.HTMLElement {
+export class Alert extends HTMLElement {
   constructor() {
     super()
     this.type = this.getAttribute('type')
     if (this.type === 'error') {
       this.type = 'danger'
+    }
+    const duration = this.getAttribute('duration')
+    let progressBar = ''
+    if (duration !== null) {
+      progressBar = `<div class="alert__progress" style="animation-duration: ${duration}s">`
+      window.setTimeout(() => {
+        this.close()
+      }, duration * 1000)
     }
     this.innerHTML = `<div class="alert alert-${this.type}">
         <svg class="icon icon-{$name}">
@@ -20,9 +28,12 @@ export default class Alert extends global.HTMLElement {
             <use xlink:href="/sprite.svg#cross"></use>
           </svg>
         </button>
+        ${progressBar}
       </div>`
-    this.querySelector('.alert-close').addEventListener('click', this.close.bind(this))
-    window.setTimeout(this.close.bind(this), 5000)
+    this.querySelector('.alert-close').addEventListener('click', e => {
+      e.preventDefault()
+      this.close()
+    })
   }
 
   close() {
@@ -31,7 +42,8 @@ export default class Alert extends global.HTMLElement {
     window.setTimeout(async () => {
       await slideUp(element)
       this.parentElement.removeChild(this)
-    }, 300)
+      this.dispatchEvent(new CustomEvent('close'))
+    }, 500)
   }
 
   get icon() {
@@ -42,5 +54,3 @@ export default class Alert extends global.HTMLElement {
     }
   }
 }
-
-global.customElements.define('alert-message', Alert)

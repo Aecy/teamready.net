@@ -2,52 +2,40 @@
 
 namespace App\Http\Admin\Data;
 
+use App\Domain\Attachment\Attachment;
 use App\Domain\Auth\User;
-use App\Http\Admin\Form\UserForm;
-use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\File;
 
-final class UserCrudData implements CrudDataInterface
+/**
+ * @property User $entity
+ */
+class UserCrudData extends AutomaticCrudData
 {
 
-    /**
-     * @Assert\NotBlank()
-     * @Assert\Length(min="3", max="255")
-     */
     public string $username;
 
-    /**
-     * @Assert\NotBlank()
-     * @Assert\Email()
-     */
     public string $email;
 
-    public User $entity;
+    public array $roles;
 
-    public static function makeUser(User $user): self
-    {
-        $data = new self();
-        $data->username = $user->getUsername();
-        $data->email = $user->getEmail();
-        $data->entity = $user;
-        return $data;
-    }
+    public ?string $country;
 
-    public function hydrate(User $user, EntityManagerInterface $em): User
-    {
-        return $user
-            ->setUsername($this->username)
-            ->setEmail($this->email);
-    }
+    public ?string $confirmationToken;
 
-    public function getEntity(): object
-    {
-        return $this->entity;
-    }
+    public ?string $theme;
 
-    public function getFormClass(): string
-    {
-        return UserForm::class;
-    }
+    public ?string $avatarFile;
+
+    public ?string $avatarName;
+
+    public ?bool $mailNotification;
+
+    public ?\DateTimeInterface $updatedAt;
+
+    public ?\DateTimeInterface $createdAt;
+
+    public ?\DateTimeInterface $lastActivityAt;
+
+    public ?\DateTimeInterface $bannedAt;
 
 }

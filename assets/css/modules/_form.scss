@@ -6,7 +6,8 @@ label {
 // Champs texte
 // ==================
 .form-group input,
-.form-group textarea {
+.form-group textarea,
+.form-group select, {
   margin-top: -3px;
   border: 1px solid var(--border);
   background: var(--background);
@@ -81,13 +82,17 @@ label {
     left: 0;
     opacity: 0;
     cursor: pointer;
+    min-height: auto;
   }
   label {
     display: flex;
     cursor: pointer;
+    justify-content: flex-start;
+    margin-bottom: 0 !important;
   }
 }
 .switch {
+  flex: none;
   width: 55px;
   height: 26px;
   display: inline-block;
@@ -96,7 +101,7 @@ label {
   box-shadow: 0 1px 4px rgba(213, 222, 233, 0.2);
   border-radius: 100px;
   margin-right: space(1);
-  transition: background .3s;
+  transition: background 0.3s;
   &::before {
     content:'';
     display: block;

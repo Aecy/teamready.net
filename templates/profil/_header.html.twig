@@ -1,0 +1,22 @@
+<header class="page-header container">
+  <div class="profil-header">
+    <form class="profil-header__avatar" enctype="multipart/form-data" method="post" action=""
+          is="auto-submit">
+{#      <img src="{{ user | avatar }}" alt="">#}
+      <img src="https://cdn.discordapp.com/avatars/258295794996609024/31316d210acab8e2351c592a2cafed4e.png?size=128" alt="">
+      <div class="profil-header__upload">
+        {{ icon('cloud') }}
+      </div>
+      <input type="file" name="avatar"/>
+    </form>
+    <div class="profil-header__body">
+      <h1 class="h1">{{ title }}</h1>
+      <p class="hstack">
+        {% include 'partials/user_badge.html.twig' %}
+        <small>
+          Inscrit {{ user.createdAt | ago('depuis') }}
+        </small>
+      </p>
+    </div>
+  </div>
+</header>

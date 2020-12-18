@@ -11,12 +11,20 @@ use Psr\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * @template E
+ *
+ * @method \App\Domain\Auth\User getUser()
+ */
 abstract class CrudController extends BaseController
 {
 
-    protected string $template = '';
+    /** @var class-string<E> */
     protected string $entity = '';
+    protected string $template = '';
     protected string $menu = '';
+    protected string $routePrefix = '';
+    protected string $searchFiled = 'title';
     protected array $events = [
         'update' => '',
         'delete' => '',
@@ -24,7 +32,7 @@ abstract class CrudController extends BaseController
     ];
 
     protected EntityManagerInterface $em;
-    private PaginatorInterface $paginator;
+    protected PaginatorInterface $paginator;
     private EventDispatcherInterface $eventDispatcher;
     private RequestStack $request;
 
@@ -63,10 +71,16 @@ abstract class CrudController extends BaseController
         $form = $this->createForm($data->getFormClass(), $data);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $data->hydrate($data->getEntity(), $this->em);
+            /** @var E $entity */
+            $entity = $data->getEntity();
+            $old = clone $entity;
+            $data->hydrate();
             $this->em->flush();
-            $this->eventDispatcher->dispatch(new $this->events['update']($data->getEntity()));
-            $this->addFlash('success', "Content has been updated");
+            if ($this->events['update'] ?? null) {
+                $this->eventDispatcher->dispatch(new $this->events['update']($entity, $old));
+            }
+            $this->addFlash('success', "Content successfully updated");
+            return $this->redirectToRoute($this->routePrefix.'_index');
         }
         return $this->render("admin/{$this->template}/edit.html.twig", [
             'form' => $form->createView(),
@@ -77,9 +91,7 @@ abstract class CrudController extends BaseController
 
     public function getRepository(): EntityRepository
     {
-        /** @var EntityRepository $repository */
-        $repository = $this->em->getRepository($this->entity);
-        return $repository;
+        return $this->em->getRepository($this->entity);
     }
 
 }

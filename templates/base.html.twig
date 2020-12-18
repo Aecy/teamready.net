@@ -13,14 +13,13 @@
     {{ encore_entry_script_tags('app') | replace({'<script': '<script defer'}) | raw }}
   {% endblock %}
 </head>
-<body>
+<body class="{{ app.user.theme is defined and app.user.theme != null ? 'dark' : '' }}">
 <nav class="header">
   <ul class="header__nav">
     <li class="header__home"><a href="#" title="Home">Home</a></li>
     <li><a href="#">Lobbys</a></li>
     <li><a href="#">Ladders</a></li>
     <li><a href="#">eSports</a></li>
-    <li id="theme"><a href="#">Dark</a></li>
   </ul>
   <ul class="header__side">
     {% if app.user %}
@@ -32,5 +31,7 @@
 </nav>
 {% block body %}
 {% endblock %}
+
+{% block javascripts_footer '' %}
 </body>
 </html>

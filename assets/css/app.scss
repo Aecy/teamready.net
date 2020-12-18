@@ -6,12 +6,14 @@
   --color: #fff;
   --color-transparent: #{rgba(#fff, 0)};
   --contrast: #d31c3e;
-  --border: #211f2d;
-  --shadow: #211f2d;
+  --border: #221f32;
+  --shadow: #221f32;
   --space: 8px;
   --gap: 20px;
+  --red: #f25353;
+  --green: #41cf7c;
+  --yellow: #feb32b;
 }
-
 .dark {
   --background: #f7fafb;
   --background-light: #fff;
@@ -22,6 +24,9 @@
   --shadow: #d8e1e8;
   --space: 8px;
   --gap: 20px;
+  --red: #f25353;
+  --green: #41cf7c;
+  --yellow: #feb32b;
 }
 
 // Outils
@@ -44,17 +49,23 @@ body {
 
 // Modules
 // ===============
+@import "modules/page";
 @import "modules/header";
 @import "modules/footer";
 @import "modules/card";
+@import "modules/color";
 @import "modules/btn";
 @import "modules/paginate";
 @import "modules/form";
 @import "modules/alert";
 @import "modules/animation";
 @import "modules/table";
+@import "modules/list";
+@import "modules/formatted";
 
 // Pages
 // ===============
 @import "pages/auth";
 @import "pages/dashboard";
+@import "pages/user";
+@import "pages/errors";

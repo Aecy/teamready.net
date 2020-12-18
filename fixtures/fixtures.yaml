@@ -1,0 +1,8 @@
+include:
+  - templates.yaml
+
+App\Domain\Auth\User:
+  user{1..5} (extends user):
+  admin (extends user):
+    username: Aecy
+    email: aecy@oe.fr

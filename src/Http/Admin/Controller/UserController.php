@@ -5,6 +5,7 @@ namespace App\Http\Admin\Controller;
 use App\Domain\Auth\Event\UserUpdatedEvent;
 use App\Domain\Auth\User;
 use App\Http\Admin\Data\UserCrudData;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -33,7 +34,7 @@ final class UserController extends CrudController
      */
     public function edit(User $user): Response
     {
-        $data = UserCrudData::makeUser($user);
+        $data = new UserCrudData($user);
         return $this->crudEdit($data);
     }
 

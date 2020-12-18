@@ -3,7 +3,6 @@
 namespace App\Domain\Auth\Exception;
 
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
-use Throwable;
 
 class UserNotFoundException extends AuthenticationException
 {

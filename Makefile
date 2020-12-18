@@ -19,26 +19,21 @@ test: vendor/autoload.php ## Execute les tests
 dev: vendor/autoload.php ## Lance le serveur de développement
 	$(php) -S $(http_server):$(http_port) -t public
 
-.PHONY: serve
-serve: vendor/autoload.php ## Allume un serveur avec le HTTPS
-	$(syf) serve --daemon --port=$(http_port)
-
-.PHONY: serve-stop
-serve-stop: vendor/autoload.php ## Eteint le serveur
-	$(syf) server:stop
-
-vendor/autoload.php: composer.lock
-	$(php) composer install
-
 ## -- Symfony
 
 .PHONY: seed
 seed: vendor/autoload.php ## Génère les données
-	$(sy) hautelook:fixtures:load -q
+	$(sy) doctrine:migrations:migrate -q
+	$(sy) doctrine:schema:validate -q
+	$(sy) app:seed -q
 
 .PHONY: migrate
-migrate: vendor/autoload.php ## Migre la base de donnée
+migrate: vendor/autoload.php ## Migre vers la base de donnée
 	$(sy) doctrine:migrations:migrate
+
+.PHONY: migration
+migration: vendor/autoload.php ## Génère les migrations vers la base de donnée
+	$(sy) make:migration
 
 .PHONY: cc
 cc: vendor/autoload.php ## Clear le cache de l'application

@@ -1,0 +1,158 @@
+// Badge
+// ==================
+.badge {
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--background);
+  padding: 0.25em 0.6em;
+  border-radius: 10rem;
+  font-size: 75%;
+  line-height: 1;
+  .icon {
+    margin-right: space(1);
+  }
+}
+.badge-success {
+  color: var(--green);
+  position: relative;
+  &::before {
+    position: absolute;
+    content:'';
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--green);
+    opacity: 0.1;
+    border-radius: 10rem;
+  }
+}
+.badge-secondary {
+  background-color: var(--border);
+}
+.badge-rounded {
+  position: relative;
+  display: inline-block;
+  padding: 8px 16px;
+  font-family: $font-alt;
+  font-weight: bold;
+  font-size: 14px;
+  color: var(--contrast);
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: currentColor;
+    opacity: 0.2;
+    z-index: -1;
+    border-radius: 100px;
+  }
+}
+
+// Pills
+// ==================
+.pill {
+  display: inline-flex;
+  align-items: center;
+  font-family: $font-alt;
+  position: relative;
+  padding: space(1) space(2);
+  color: var(--contrast);
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: bold;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: currentColor;
+    opacity: 0.1;
+    border-radius: 20px;
+  }
+}
+.pill-small {
+  font-size: 12px;
+}
+.pill svg {
+  width: 16px;
+  height: 16px;
+  margin-right: space(1);
+}
+.pill-green {
+  color: var(--green);
+}
+.pill-yellow {
+  color: var(--yellow);
+}
+.pill-red {
+  color: var(--red);
+}
+.pill-grey {
+  color: var(--color);
+
+  &::after {
+    opacity: 0.1;
+  }
+}
+.pill-xsmall {
+  font-size: 11px;
+  height: 18px;
+  padding: 0 9px;
+  font-weight: normal;
+  line-height: 18px;
+
+  .icon {
+    transform: none;
+    vertical-align: middle;
+    margin-right: space(.5);
+    display: block;
+    width: 12px;
+    height: 12px;
+  }
+
+  &::after {
+    border-radius:3px;
+  }
+}
+
+// Tabs bar
+// ==================
+.tabs-bar {
+  position: relative;
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  &::after {
+    content:'';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background-color: var(--border);
+  }
+}
+.tabs-bar a {
+  display: block;
+  padding: space(2);
+  font-size: 1.2em;
+  white-space: nowrap;
+  position: relative;
+  z-index: 2;
+}
+.tabs-bar .icon {
+  width: 1rem;
+  height: 1rem;
+  margin-right: space(1);
+}
+.tabs-bar a[aria-selected="true"] {
+  color: var(--contrast);
+  border-bottom: 3px solid var(--contrast);
+}

@@ -10,6 +10,33 @@
 
   <div class="dashboard__card">
     {{ form_start(form, {attr: {class: 'stacked'}}) }}
+      <h1>Information générale</h1>
+      <hr>
+      <div class="row">
+        {{ form_row(form.username) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.country) }}
+      </div>
+      <h1>Autres</h1>
+      <hr>
+      <div class="row">
+        {{ form_row(form.roles) }}
+        {{ form_row(form.confirmationToken) }}
+        {{ form_row(form.theme) }}
+      </div>
+      <h1>Actions</h1>
+      <hr>
+      <div class="row">
+        {{ form_row(form.mailNotification) }}
+      </div>
+      <h1>Meta data</h1>
+      <hr>
+      <div class="row">
+        {{ form_row(form.updatedAt) }}
+        {{ form_row(form.lastActivityAt) }}
+        {{ form_row(form.bannedAt) }}
+        {{ form_row(form.createdAt) }}
+      </div>
       {{ form_rest(form) }}
       <button type="submit" class="btn-gradient">Editer</button>
     {{ form_end(form) }}

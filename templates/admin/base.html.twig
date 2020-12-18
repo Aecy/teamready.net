@@ -8,28 +8,42 @@
   <link href="https://fonts.googleapis.com/css?family=Montserrat:500,700|Roboto:300,400&display=swap" rel="stylesheet">
   {% block stylesheets %}
     {{ encore_entry_link_tags('app') }}
+    {{ encore_entry_link_tags('admin') }}
   {% endblock %}
   {% block javascripts %}
-    {{ encore_entry_script_tags('app') | replace({'<script': '<script defer'}) | raw }}
+    {{ encore_entry_script_tags('app') }}
+    {{ encore_entry_script_tags('admin') }}
   {% endblock %}
 </head>
-<body>
-<nav class="header">
-  <ul class="header__nav">
-    <li class="header__home"><a href="#" title="Home">Dashboard</a></li>
-    <li><a href="{{ path('admin_user_index') }}" {{ menu_active('user') }}>{{ icon('user') }} Users</a></li>
-    <li id="theme"><a href="#">Dark</a></li>
-  </ul>
-  <ul class="header__side">
-    {% if app.user %}
-      <li><a href="{{ path('auth_login') }}">{{ app.user.username }}</a></li>
-    {% else %}
-      <li><a href="{{ path('auth_login') }}">Login</a></li>
-    {% endif %}
-  </ul>
-</nav>
-<div class="dashboard">
-  {% block body %}{% endblock %}
-</div>
+<body class="admin {{ app.user and app.user.theme ? 'theme-' ~ app.user.theme }}">
+  <div class="dashboard-page">
+    <aside class="dashboard-sidebar">
+      <div class="dashboard-sidebar__wrapper">
+        <ul class="dashboard-sidebar__main">
+          <li><a href="#">{{ icon('pen') }} Dashboard</a></li>
+          <li class="title">Users</li>
+          <li><a href="#">{{ icon('user') }} Users</a></li>
+          <li><a href="#">{{ icon('pen') }} Roles</a></li>
+        </ul>
+      </div>
+    </aside>
+    <aside class="dashboard-header">
+      <div class="dashboard-header__search">
+        {% if searchable is defined and searchable %}
+          <form>
+            <input type="text" name="q" placeholder="Rechercher..." value="{{ app.request.get('q') }}">
+          </form>
+        {% endif %}
+      </div>
+      <ul class="dashboard-header__nav">
+        <li class="header__notifications">Notification</li>
+        <li class="header__logout">Logout</li>
+      </ul>
+    </aside>
+    <main class="dashboard-body">
+      {% include 'partials/alert.html.twig' with {floating: true, duration: 2} %}
+      {% block body '' %}
+    </main>
+  </div>
 </body>
 </html>

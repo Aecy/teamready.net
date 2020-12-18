@@ -1,0 +1,144 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+  {% include 'profil/_header.html.twig' with {title: 'My profile'} %}
+  {% include 'profil/_tabs.html.twig' with {active: 'edit'} %}
+  {% include 'partials/alert.html.twig' %}
+
+  <div class="layout-sidebar py5" style="--gap:5;">
+    <main class="stack-large">
+      {# Edition du profil #}
+      {{ form_start(form_update, {attr: {class: 'stack-large'}}) }}
+      <div class="stack">
+        <h2 class="h3">
+          {{ icon('user') }}
+          <strong>My information</strong>
+        </h2>
+        <div class="card p3 grid">
+          {{ form_row(form_update.email) }}
+          {{ form_row(form_update.country) }}
+        </div>
+        <div class="text-right">
+          <button type="submit" class="btn-gradient" name="action" value="update">Update my profile</button>
+        </div>
+      </div>
+      <div class="stack">
+        <h2 class="h3">
+          {{ icon('comments') }}
+          <strong>Preferences</strong>
+        </h2>
+        <div class="card p3 stack-large">
+          <section>
+            <div class="section-title">
+              Notifications
+            </div>
+            {{ form_row(form_update.mailNotification, {label: 'Receive notifications by email too'}) }}
+          </section>
+          <section>
+            <div class="section-title">
+              Appearance
+            </div>
+            <div class="stack">
+              {{ form_row(form_update.useSystemTheme, {label: 'Let your system choise for you'}) }}
+              <div hidden id="theme-selector">
+                {{ form_row(form_update.useDarkTheme, {label: 'Use light theme'}) }}
+              </div>
+            </div>
+          </section>
+        </div>
+        <div class="text-right">
+          <button type="submit" class="btn-gradient" name="action" value="update">Update my preferences</button>
+        </div>
+      </div>
+      {{ form_end(form_update) }}
+
+      {# Edition du mot de passe #}
+      {{ form_start(form_password, {attr: {class: 'stack-large'}}) }}
+      <div class="stack">
+        <h2 class="h3">
+          {{ icon('lock') }}
+          <strong>Password</strong>
+        </h2>
+        <div class="card p3 grid">
+          {{ form_row(form_password.password) }}
+        </div>
+        <div class="text-right">
+          <button type="submit" class="btn-gradient" name="action" value="password">Update my password</button>
+        </div>
+      </div>
+      {{ form_end(form_password) }}
+
+      {# Suppression du compte #}
+      <div class="stack">
+        <h2 class="h3 text-danger">
+          {{ icon('trash') }}
+          <strong>Danger Zone</strong>
+        </h2>
+        <p style="font-size: 1.2rem;">
+          {% if user.deletedAt %}
+            Your account will be automatically deleted {{ user.deletedAt | ago('dans') }}
+          {% else %}
+            You are not satisfied with the content of the site? <br>
+            Or would you like to delete all the information associated with this account?
+          {% endif %}
+        </p>
+        <div class="text-right">
+          {% if user.deletedAt %}
+            <form method="POST" action="">
+              <button class="btn-danger">
+                {{ icon('trash') }}
+                Cancel deletion
+              </button>
+            </form>
+          {% else %}
+            <delete-account days="5" url="test" csrf="{{ csrf_token('delete-account') }}"></delete-account>
+          {% endif %}
+        </div>
+      </div>
+    </main>
+    <aside class="stack">
+      <div class="mb2">
+        {{ render(controller('App\\Http\\Controller\\Template\\PremiumStateController::state')) }}
+      </div>
+      <h3 class="h4">Social authentification</h3>
+      <p>Link your account to your social account.</p>
+      <div class="stack mb4">
+        <div>
+          <a href="#" class="btn-discord">
+            {{ icon('discord') }}
+            {{ user.discordId ? 'Change account' : 'Link your discord account' }}
+          </a>
+        </div>
+        <div>
+          <a href="#" class="btn-steam">
+            {{ icon('steam') }}
+            {{ user.steamId ? 'Unlink' : 'Link' }} your steam account
+          </a>
+        </div>
+        <div>
+          <a href="#" class="btn-battle">
+            {{ icon('user') }}
+            {{ user.battleId ? 'Unlink' : 'Link' }} your battle.net account
+          </a>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+{% endblock %}
+
+{% block javascripts_footer %}
+  {{ parent() }}
+  <script>
+    const systemThemeSwitch = document.querySelector('#{{ form_update.useSystemTheme.vars.id }}')
+    const switchSelectorContainer = document.querySelector('#theme-selector')
+
+    function onSystemChangeTheme() {
+      document.body.classList.toggle('dark')
+      switchSelectorContainer.setAttribute('hidden', 'hidden')
+    }
+
+    systemThemeSwitch.addEventListener('change', onSystemChangeTheme)
+  </script>
+{% endblock %}

@@ -1,0 +1,8 @@
+{% extends layout %}
+{% import "mails/macros.twig" as e %}
+{% block body %}
+  {% apply markdown_email %}
+    ## Bonjour **{{ username }}**
+  {% endapply %}
+  {{ e.button('Confirmer cet email', url('user_email_confirm', {token: token})) }}
+{% endblock %}

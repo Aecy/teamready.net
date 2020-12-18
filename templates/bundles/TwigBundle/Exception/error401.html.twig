@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title '401 Unauthorized' %}
+
+{% block body %}
+  <header class="page-header container">
+    <div class="errors">
+      <h1 class="h1 mb2">{{ status_code }} {{ status_text }}</h1>
+      <div class="errors-background" aria-error="401"></div>
+      <button class="btn-primary mt2" onclick="window.history.back();">Previous page</button>
+    </div>
+  </header>
+{% endblock %}

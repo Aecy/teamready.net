@@ -54,7 +54,7 @@ class PasswordController extends AbstractController
         $form = $this->createForm(PasswordResetConfirmForm::class, $data);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $service->updatePassword($data->getPassword(), $user);
+            $service->updatePassword($data->getPassword(), $token);
             $this->addFlash('success', "Your password has been updated");
             return $this->redirectToRoute('auth_login');
         }

@@ -1,0 +1,16 @@
+// Page header
+// ==========================================================================
+.page-header {
+  background: var(--background);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: space(6);
+  padding-top: space(6);
+}
+
+// Page alternant des blocks de couleurs
+// ==========================================================================
+.sections > * {
+  @extend %container;
+  padding-top: 115px;
+  padding-bottom: 115px;
+}

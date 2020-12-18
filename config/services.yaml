@@ -1,5 +1,5 @@
 parameters:
-  admin_prefix: '%env(resolve:ADMIN_PREFIX)%'
+  admin_prefix: /admin
 
 services:
   _defaults:
@@ -20,6 +20,9 @@ services:
   App\Http\Admin\Controller\:
     resource: '../src/Http/Admin/Controller/'
     tags: [ 'controller.service_arguments' ]
+
+  App\Core\UploaderBundle\PropertyGroupedDirectoryNamer:
+    public: true
 
   # add more service definitions when explicit configuration is needed
   # please note that last definitions always *replace* previous ones

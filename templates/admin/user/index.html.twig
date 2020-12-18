@@ -1,48 +1,37 @@
-{% extends 'admin/base.html.twig' %}
+{% extends 'admin/layout/card.html.twig' %}
 
-{% block body %}
+{% block title %}
+  {{ icon('user') }}
+  Gestion des utilisateurs
+{% endblock %}
 
-  <div class="dashboard__title">
-    {{ icon('pen') }}
-    Gestion des utilisateurs
-  </div>
-
-  <div class="dashboard__card">
-    <div class="flex">
-      <form class="form-group dashboard__search">
-        <input type="text" name="q" placeholder="Rechercher" value="{{ app.request.get('q') }}">
-      </form>
-      <a href="#" class="dashboard__btn">Ajouter un utilisateur</a>
-    </div>
-    <table class="table">
-      <thead>
+{% block content %}
+  <table class="table">
+    <thead>
+    <tr>
+      <td></td>
+      <td>Pseudo</td>
+      <td>Email</td>
+      <td>Premium</td>
+      <td class="text-right">Actions</td>
+    </tr>
+    </thead>
+    <tbody>
+    {% for user in rows %}
       <tr>
-        <th>ID</th>
-        <th>Nom</th>
-        <th class="text-right">Actions</th>
+        <td class="dashboard-id">{{ user.id }}</td>
+        <td class="dashboard-id">{{ user.username }}</td>
+        <td>{{ user.email }}</td>
+        <td class="dashboard-id">Non premium</td>
+        <td>
+          <div class="dashboard-actions">
+            /
+          </div>
+        </td>
       </tr>
-      </thead>
-      <tbody>
-      {% for row in rows %}
-        {% set link = path('admin_user_edit', {user: row.id}) %}
-        <tr>
-          <td class="dashboard__id">
-            <a href="{{ link }}">{{ row.id }}</a>
-          </td>
-          <td>
-            <a href="{{ link }}">{{ row.username }}</a>
-          </td>
-          <td>
-            <div class="dashboard__actions">
-              <a href="{{ link }}">{{ icon('edit') }}</a>
-            </div>
-          </td>
-        </tr>
-      {% endfor %}
-      </tbody>
-    </table>
+    {% endfor %}
+    </tbody>
+  </table>
 
-    {{ knp_pagination_render(rows) }}
-  </div>
-
+{#  {{ paginate(rows) }}#}
 {% endblock %}
