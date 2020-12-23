@@ -4,8 +4,9 @@ namespace App\Tests;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase as SymfonyWebTestCase;
 
-class WebTestCase extends \Symfony\Bundle\FrameworkBundle\Test\WebTestCase
+class WebTestCase extends SymfonyWebTestCase
 {
 
     protected KernelBrowser $client;
@@ -17,7 +18,14 @@ class WebTestCase extends \Symfony\Bundle\FrameworkBundle\Test\WebTestCase
         /** @var EntityManagerInterface $em */
         $em = self::$container->get(EntityManagerInterface::class);
         $this->em = $em;
+        $this->em->getConnection()->getConfiguration()->setSQLLogger(null);
         parent::setUp();
+    }
+
+    protected function tearDown(): void
+    {
+        $this->em->clear();
+        parent::tearDown();
     }
 
     public function expectErrorAlert(): void

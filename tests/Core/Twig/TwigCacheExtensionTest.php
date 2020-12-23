@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Tests\Infrastructure\Twig;
+namespace App\Tests\Core\Twig;
 
-use App\Infrastructure\Twig\TwigCacheExtension;
+use App\Core\Twig\TwigCacheExtension;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Cache\Adapter\AdapterInterface;

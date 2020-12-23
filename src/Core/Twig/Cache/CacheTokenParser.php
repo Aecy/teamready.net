@@ -1,9 +1,7 @@
 <?php
 
-namespace App\Infrastructure\Twig\Cache;
+namespace App\Core\Twig\Cache;
 
-use Twig\Error\SyntaxError;
-use Twig\Node\Node;
 use Twig\Token;
 use Twig\TokenParser\AbstractTokenParser;
 

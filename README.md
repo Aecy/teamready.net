@@ -1,7 +1,5 @@
 # teamready.net
 
-[![SymfonyInsight](https://insight.symfony.com/projects/3a88de22-6e3a-4cbf-9252-63e19692c8de/small.svg)](https://insight.symfony.com/projects/3a88de22-6e3a-4cbf-9252-63e19692c8de)
-
 Dépôt pour la nouvelle version de teamready.net
 
 - [Etat d'avancement](#etat-davancement)

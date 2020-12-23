@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Tests\Infrastructure\Twig;
+namespace App\Tests\Core\Twig;
 
-use App\Infrastructure\Twig\Cache\CacheableInterface;
+use App\Core\Twig\Cache\CacheableInterface;
 
 class CacheEntityFaker implements CacheableInterface
 {

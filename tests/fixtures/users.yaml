@@ -5,10 +5,10 @@ App\Domain\Auth\User:
   user{1..5} (extends user):
 
   user_admin (extends user):
-    username: Grafikart
-    email: fake\@email.fr
+    username: Aecy
+    email: fake@email.fr
 
   user_unconfirmed (extends user):
     username: Unconfirmed
-    email: unconfirmed\@email.fr
+    email: unconfirmed@email.fr
     confirmationToken: tihsisaconfirmationtokenfromteamreadyfortesting

@@ -29,7 +29,7 @@ class User implements UserInterface
      * @ORM\GeneratedValue(strategy="IDENTITY")
      * @ORM\Column(type="integer")
      */
-    private int $id = 0;
+    private ?int $id = null;
 
     /**
      * @ORM\Column(type="string", length=255, unique=true)

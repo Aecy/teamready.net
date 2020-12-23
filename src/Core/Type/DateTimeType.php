@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Infrastructure\Type;
+namespace App\Core\Type;
 
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType as DateTimeTypeAlias;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType as SymfonyDateTime;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class DateTimeType extends DateTimeTypeAlias
+class DateTimeType extends SymfonyDateTime
 {
 
     public function configureOptions(OptionsResolver $resolver): void

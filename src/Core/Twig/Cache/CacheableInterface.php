@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Infrastructure\Twig\Cache;
+namespace App\Core\Twig\Cache;
 
 interface CacheableInterface
 {

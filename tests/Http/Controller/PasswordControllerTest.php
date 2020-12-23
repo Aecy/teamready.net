@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Controller;
+namespace App\Tests\Http\Controller;
 
 use App\Domain\Auth\User;
 use App\Domain\Password\Entity\PasswordResetToken;
@@ -87,8 +87,7 @@ class PasswordControllerTest extends WebTestCase
     {
         /** @var array<string,User> $users */
         $users = $this->loadFixtures(['password-reset']);
-        $crawler = $this->client->request('GET', self::LOGIN_PATH);
-        $crawler = $this->client->click($crawler->selectLink(self::FORGET_PASSWORD_BUTTON)->link());
+        $crawler = $this->client->request('GET', self::RESET_PASSWORD_PATH);
         $form = $crawler->selectButton(self::RESET_PASSWORD_BUTTON)->form();
         $form->setValues([
             'email' => $users['user1']->getEmail(),

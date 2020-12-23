@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Infrastructure\Twig;
+namespace App\Core\Twig;
 
 use App\Infrastructure\Twig\Cache\CacheableInterface;
 use App\Infrastructure\Twig\Cache\CacheTokenParser;

@@ -13,6 +13,7 @@ help: ## Affiche cette demande d'aide
 
 .PHONY: test
 test: vendor/autoload.php ## Execute les tests
+	$(sy) doctrine:schema:validate --skip-sync
 	.\vendor\bin\phpunit
 
 .PHONY: dev
@@ -60,3 +61,8 @@ fixture: vendor/autoload.php ## Construit la base de donnée
 	$(sy) doctrine:schema:create
 	$(sy) doctrine:schema:validate
 	$(sy) doctrine:fixtures:load -n
+
+## -- Dépendances
+vendor/autoload.php: composer.lock
+	$(php) composer install
+	touch vendor/autoload.php

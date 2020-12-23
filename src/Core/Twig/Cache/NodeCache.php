@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Infrastructure\Twig\Cache;
+namespace App\Core\Twig\Cache;
 
-use App\Infrastructure\Twig\TwigCacheExtension;
+use App\Core\Twig\TwigCacheExtension;
 use Twig\Compiler;
 use Twig\Node\Expression\AbstractExpression;
 use Twig\Node\Node;

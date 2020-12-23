@@ -2,20 +2,24 @@
 
 namespace App\Tests;
 
+use App\Core\Helper\PathHelper;
+use Fidry\AliceDataFixtures\LoaderInterface;
+
 trait FixturesTrait
 {
 
-    use \Liip\TestFixturesBundle\Test\FixturesTrait {
-        loadFixtureFiles as liipLoadFixtureFiles;
-    }
-
     public function loadFixtures(array $fixtures): array
     {
-        return $this->liipLoadFixtureFiles(
-            array_map(function ($fixture) {
-                return __DIR__ . '/fixtures/' . $fixture . '.yaml';
-            }, $fixtures)
-        );
+        $fixturePath = $this->getPath();
+        $files = array_map(fn ($fixture) => PathHelper::join($fixturePath, $fixture.'.yaml'), $fixtures);
+        /** @var LoaderInterface $loader */
+        $loader = static::$container->get('fidry_alice_data_fixtures.loader.doctrine');
+        return $loader->load($files);
+    }
+
+    public function getPath(): string
+    {
+        return __DIR__ . '/fixtures/';
     }
 
 }
