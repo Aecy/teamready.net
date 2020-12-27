@@ -22,6 +22,7 @@ services:
     tags: [ 'controller.service_arguments' ]
 
   App\Core\UploaderBundle\PropertyGroupedDirectoryNamer:
+    class: App\Core\UploaderBundle\PropertyGroupedDirectoryNamer
     public: true
 
   # add more service definitions when explicit configuration is needed

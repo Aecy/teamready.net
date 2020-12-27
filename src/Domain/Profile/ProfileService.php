@@ -9,7 +9,7 @@ use App\Domain\Profile\Event\EmailVerificationEvent;
 use App\Domain\Profile\Exception\TooManyEmailChangeException;
 use App\Domain\Profile\Repository\EmailVerificationRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Intervention\Image\ImageManager;
+use Intervention\Image\Facades\Image;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class ProfileService
@@ -35,13 +35,9 @@ class ProfileService
 
     public function updateAvatar(AvatarDto $data): void
     {
-        if ($data->file->getRealPath() === false) {
-            throw new \RuntimeException('Impossible de redimensionner un avatar non existant');
+        if (false === $data->file->getRealPath()) {
+            throw new \RuntimeException("Impossible d'attribuer un avatar non existant");
         }
-        // Redimensionne l'image
-        $manager = new ImageManager(['driver' => 'imagick']);
-        $manager->make($data->file)->fit(110, 110)->save($data->file->getRealPath());
-        // Déplace dans le profil utilisateur
         $data->user->setAvatarFile($data->file);
         $data->user->setUpdatedAt(new \DateTime());
     }

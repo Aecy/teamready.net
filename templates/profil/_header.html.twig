@@ -1,9 +1,7 @@
 <header class="page-header container">
   <div class="profil-header">
-    <form class="profil-header__avatar" enctype="multipart/form-data" method="post" action=""
-          is="auto-submit">
-{#      <img src="{{ user | avatar }}" alt="">#}
-      <img src="https://cdn.discordapp.com/avatars/258295794996609024/31316d210acab8e2351c592a2cafed4e.png?size=128" alt="">
+    <form class="profil-header__avatar" enctype="multipart/form-data" method="post" action="{{ path('user_avatar') }}" is="auto-submit">
+      <img src="{{ user | avatar }}" alt="avatar logo">
       <div class="profil-header__upload">
         {{ icon('cloud') }}
       </div>

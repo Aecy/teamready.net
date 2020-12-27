@@ -2,9 +2,12 @@
 
 namespace App\Tests;
 
+use App\Domain\Auth\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase as SymfonyWebTestCase;
+use Symfony\Component\BrowserKit\Cookie;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 class WebTestCase extends SymfonyWebTestCase
 {
@@ -45,6 +48,29 @@ class WebTestCase extends SymfonyWebTestCase
         } else {
             $this->assertEquals($expectedErrors, $this->client->getCrawler()->filter('.form-error')->count(), 'Form errors missmatch');
         }
+    }
+
+    public function login(?User $user)
+    {
+        if ($user === null) {
+            return;
+        }
+        /** @var EntityManagerInterface $em */
+        $em = self::$container->get(EntityManagerInterface::class);
+        $managedUser = $em->getRepository(User::class)->find($user->getId());
+        if ($managedUser === null) {
+            throw new \Exception("Impossible de retrouver l'utilisateur {$user->getId()}");
+        }
+        $session = self::$container->get('session');
+        $firewallName = 'main';
+        $firewallContext = $firewallName;
+        $token = new UsernamePasswordToken($managedUser, null, $firewallName, $managedUser->getRoles());
+        $session->set('_security_' . $firewallContext, serialize($token));
+        $session->save();
+        $cookie = new Cookie($session->getName(), $session->getId());
+
+        // On ajoute le cookie au client
+        $this->client->getCookieJar()->set($cookie);
     }
 
 }

@@ -5,6 +5,7 @@ namespace App\Domain\Auth;
 use App\Domain\Attachment\Attachment;
 use App\Infrastructure\Social\Entity\SocialLoggableTrait;
 use Doctrine\ORM\Mapping as ORM;
+use Exception;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -18,7 +19,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * @UniqueEntity(fields={"email"})
  * @UniqueEntity(fields={"username"})
  */
-class User implements UserInterface
+class User implements UserInterface, \Serializable
 {
 
     use RoleTrait;
@@ -69,6 +70,7 @@ class User implements UserInterface
     private ?string $theme = null;
 
     /**
+     * @Assert\Image(mimeTypes="image/jpeg")
      * @Vich\UploadableField(mapping="avatars", fileNameProperty="avatarName")
      */
     private ?File $avatarFile = null;
@@ -291,5 +293,22 @@ class User implements UserInterface
      */
     public function eraseCredentials(): void
     {
+    }
+
+    public function serialize(): string
+    {
+        return serialize(array(
+            $this->id,
+            $this->username,
+            $this->password
+        ));
+    }
+
+    /**
+     * @param string $serialized
+     */
+    public function unserialize($serialized): void
+    {
+        [$this->id, $this->username, $this->password] = unserialize($serialized);
     }
 }

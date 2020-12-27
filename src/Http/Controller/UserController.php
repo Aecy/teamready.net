@@ -60,6 +60,10 @@ class UserController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/profil/avatar", name="user_avatar", methods={"POST"})
+     * @IsGranted("ROLE_USER")
+     */
     public function avatar(
         Request $request,
         EntityManagerInterface $em,
@@ -75,7 +79,7 @@ class UserController extends AbstractController
         } else {
             $service->updateAvatar($data);
             $em->flush();
-            $this->addFlash('success', 'Avatar mis à jour avec succès');
+            $this->addFlash('success', 'Avatar updated!');
         }
 
         return $this->redirectToRoute('user_edit');
