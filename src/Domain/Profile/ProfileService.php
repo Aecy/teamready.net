@@ -38,8 +38,10 @@ class ProfileService
         if ($data->file->getRealPath() === false) {
             throw new \RuntimeException('Impossible de redimensionner un avatar non existant');
         }
+        // Redimensionne l'image
         $manager = new ImageManager(['driver' => 'imagick']);
         $manager->make($data->file)->fit(110, 110)->save($data->file->getRealPath());
+        // Déplace dans le profil utilisateur
         $data->user->setAvatarFile($data->file);
         $data->user->setUpdatedAt(new \DateTime());
     }
@@ -55,7 +57,7 @@ class ProfileService
         }
         if ($data->email !== $data->user->getEmail()) {
             $lastRequest = $this->emailVerificationRepository->findLast($data->user);
-            if ($lastRequest && $lastRequest->getCreatedAt() > new \DateTime('-1 week')) {
+            if ($lastRequest && $lastRequest->getCreatedAt() > new \DateTime('-1 hour')) {
                 throw new TooManyEmailChangeException($lastRequest);
             } else {
                 if ($lastRequest) {

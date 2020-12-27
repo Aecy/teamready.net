@@ -50,7 +50,7 @@ purge: vendor/autoload.php ## Nettoie le cache et les logs serveur
 
 ## -- Symfony binary
 .PHONY: ca-install
-ca-install:  vendor/autoload.php ## Initialise le certificat SSL HTTPS localement
+ca-install: vendor/autoload.php ## Initialise le certificat SSL HTTPS localement
 	$(syf) server:ca:install
 
 .PHONY: fixture
@@ -64,5 +64,4 @@ fixture: vendor/autoload.php ## Construit la base de donnée
 
 ## -- Dépendances
 vendor/autoload.php: composer.lock
-	$(php) composer install
-	touch vendor/autoload.php
+	composer install

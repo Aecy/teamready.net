@@ -2,7 +2,7 @@
 
 namespace App\Domain\Profile\Exception;
 
-use App\Domain\Profile\Entity\EmailVerification;
+use App\Domain\Profile\EmailVerification;
 
 class TooManyEmailChangeException extends \Exception
 {
