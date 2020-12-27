@@ -2,28 +2,15 @@
 
 namespace App\Domain\Profile\Exception;
 
-use App\Domain\Profile\EmailVerification;
-use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use App\Domain\Profile\Entity\EmailVerification;
 
-class TooManyEmailChangeException extends AuthenticationException
+class TooManyEmailChangeException extends \Exception
 {
-
-    private EmailVerification $emailVerification;
+    public EmailVerification $emailVerification;
 
     public function __construct(EmailVerification $emailVerification)
     {
+        parent::__construct();
         $this->emailVerification = $emailVerification;
-        parent::__construct('You already changed your email less than a week ago.', 0, null);
     }
-
-    public function getEmailVerification(): EmailVerification
-    {
-        return $this->emailVerification;
-    }
-
-    public function getMessageKey()
-    {
-        return 'You already changed your email less than a week ago.';
-    }
-
 }

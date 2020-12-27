@@ -51,7 +51,7 @@ class SecurityControllerTest extends WebTestCase
             'password' => '0000'
         ]);
         $this->client->submit($form);
-        $this->assertResponseRedirects('/');
+        $this->assertResponseRedirects('/profil/edit');
     }
 
     public function testAttemptLimit(): void

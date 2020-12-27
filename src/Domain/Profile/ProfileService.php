@@ -3,11 +3,13 @@
 namespace App\Domain\Profile;
 
 use App\Domain\Password\TokenGeneratorService;
+use App\Domain\Profile\Dto\AvatarDto;
 use App\Domain\Profile\Dto\ProfileUpdateDto;
 use App\Domain\Profile\Event\EmailVerificationEvent;
 use App\Domain\Profile\Exception\TooManyEmailChangeException;
 use App\Domain\Profile\Repository\EmailVerificationRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Intervention\Image\ImageManager;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class ProfileService
@@ -20,15 +22,26 @@ class ProfileService
 
     public function __construct(
         TokenGeneratorService $tokenGeneratorService,
+        EmailVerificationRepository $emailVerificationRepository,
         EventDispatcherInterface $eventDispatcher,
-        EntityManagerInterface $em,
-        EmailVerificationRepository $emailVerificationRepository
+        EntityManagerInterface $em
     )
     {
         $this->tokenGeneratorService = $tokenGeneratorService;
         $this->eventDispatcher = $eventDispatcher;
         $this->em = $em;
         $this->emailVerificationRepository = $emailVerificationRepository;
+    }
+
+    public function updateAvatar(AvatarDto $data): void
+    {
+        if ($data->file->getRealPath() === false) {
+            throw new \RuntimeException('Impossible de redimensionner un avatar non existant');
+        }
+        $manager = new ImageManager(['driver' => 'imagick']);
+        $manager->make($data->file)->fit(110, 110)->save($data->file->getRealPath());
+        $data->user->setAvatarFile($data->file);
+        $data->user->setUpdatedAt(new \DateTime());
     }
 
     public function updateProfile(ProfileUpdateDto $data): void
