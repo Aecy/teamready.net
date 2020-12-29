@@ -2,36 +2,32 @@
 
 namespace App\Infrastructure\Mailing;
 
+use App\Domain\Auth\Event\UserCreatedEvent;
 use App\Domain\Password\Event\PasswordResetTokenCreatedEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 
-/**
- * todo: refactor this class with Mailer
- */
 class AuthSubscriber implements EventSubscriberInterface
 {
 
-    private EmailFactory $factory;
-    private MailerInterface $mailer;
+    private Mailer $mailer;
 
-    public function __construct(EmailFactory $factory, MailerInterface $mailer)
+    public function __construct(Mailer $mailer)
     {
-        $this->factory = $factory;
         $this->mailer = $mailer;
     }
 
     public static function getSubscribedEvents(): array
     {
         return [
-            PasswordResetTokenCreatedEvent::class => 'onPasswordReset'
+            PasswordResetTokenCreatedEvent::class => 'onPasswordReset',
+            UserCreatedEvent::class => 'onRegister'
         ];
     }
 
     public function onPasswordReset(PasswordResetTokenCreatedEvent $event): void
     {
-        $email = $this->factory->render('mails/auth/password_reset.html.twig', [
+        $email = $this->mailer->create('mails/auth/password_reset.html.twig', [
             'token' => $event->getToken()->getToken(),
             'id' => $event->getUser()->getId(),
             'username' => $event->getUser()->getUsername()
@@ -39,7 +35,18 @@ class AuthSubscriber implements EventSubscriberInterface
             ->to($event->getUser()->getEmail())
             ->from('no-reply@teamready.net')
             ->priority(Email::PRIORITY_HIGH)
-            ->subject("Reset password");
+            ->subject("teamready | Reset password");
+        $this->mailer->send($email);
+    }
+
+    public function onRegister(UserCreatedEvent $event): void
+    {
+        $email = $this->mailer->create('mails/auth/register.html.twig', [
+            'user' => $event->getUser()
+        ])
+            ->to($event->getUser()->getEmail())
+            ->from('no-reply@teamready.net')
+            ->subject("teamready | Confirm account");
         $this->mailer->send($email);
     }
 

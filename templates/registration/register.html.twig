@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+  <div class="auth-container">
+    {% include 'partials/alert.html.twig' %}
+
+    {{ form_start(form, {attr: {class: 'auth-form'}}) }}
+      <h1 class="auth-title">
+        Registration
+      </h1>
+      {{ form_row(form.username) }}
+      {{ form_row(form.email) }}
+      {{ form_row(form.plainPassword) }}
+      <button type="submit" class="btn-gradient">Register</button>
+    {{ form_end(form) }}
+  </div>
+{% endblock %}

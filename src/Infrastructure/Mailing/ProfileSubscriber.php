@@ -31,7 +31,7 @@ class ProfileSubscriber implements EventSubscriberInterface
         ])
             ->to($event->emailVerification->getEmail())
             ->priority(Email::PRIORITY_HIGH)
-            ->subject('Update email');
+            ->subject("teamready | Update email");
         $this->mailer->send($email);
     }
 }
