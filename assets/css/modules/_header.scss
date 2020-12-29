@@ -50,6 +50,10 @@
   margin-left: 0;
 }
 
+.header__side > * + * {
+  margin-left: space(2);
+}
+
 @include down(700) {
   .header .header__nav li {
     display: none;

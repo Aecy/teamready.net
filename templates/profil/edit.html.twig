@@ -105,15 +105,15 @@
       <p>Link your account to your social account.</p>
       <div class="stack mb4">
         <div>
-          <a href="#" class="btn-discord">
+          <a href="{{ path('oauth_discord') }}" class="btn-discord">
             {{ icon('discord') }}
-            {{ user.discordId ? 'Change account' : 'Link your discord account' }}
+            {{ user.discordId ? 'Change discord account' : 'Link your discord account' }}
           </a>
         </div>
         <div>
-          <a href="#" class="btn-steam">
+          <a href="{{ path('oauth_steam') }}" class="btn-steam">
             {{ icon('steam') }}
-            {{ user.steamId ? 'Unlink' : 'Link' }} your steam account
+            {{ user.steamId ? 'Change steam account' : 'Link your steam account' }}
           </a>
         </div>
         <div>
